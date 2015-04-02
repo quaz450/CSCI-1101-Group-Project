@@ -1,0 +1,152 @@
+/* This is what I have so far for the main GUI I have the bassics set up
+ * and the action listeners for the buttons set up I can't really do much
+ * other than this. I am currently making the other GUI's that will pop up 
+ * when you click the buttons. I also have the player rotation figured out
+ */
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+
+public class MainPanel extends JPanel implements ActionListener{
+    private JLabel p1money;
+    private JLabel p2money;
+    private JLabel p3money;
+    
+    private JRadioButton p1;
+    private JRadioButton p2;
+    private JRadioButton p3;
+    
+    private JButton spin;
+    private JButton guessLett;
+    private JButton buyVowel;
+    private JButton guessPhrase;
+
+    public MainPanel() {
+        //construct components
+        
+        p1money = new JLabel ("$");
+        p2money = new JLabel ("$");
+        p3money = new JLabel ("$");
+
+        p1 = new JRadioButton ("Player 1");
+        p2 = new JRadioButton ("Player 2");
+        p3 = new JRadioButton ("Player 3");
+        
+        spin = new JButton ("Spin!");
+        guessLett = new JButton ("Guess Letter");
+        buyVowel = new JButton ("Buy Vowel");
+        guessPhrase = new JButton ("Guess Phrase");
+
+        //set component properties
+        p1.setEnabled(false);
+        p2.setEnabled(false);
+        p3.setEnabled(false);
+        
+        p1.setSelected(true);
+  
+        spin.setEnabled(true);
+        guessLett.setEnabled(false);
+        buyVowel.setEnabled(false);
+        guessPhrase.setEnabled(false);
+        
+        spin.addActionListener(this);
+        guessLett.addActionListener(this);
+        buyVowel.addActionListener(this);
+        guessPhrase.addActionListener(this);
+        
+        
+        //adjust size and set layout
+        setPreferredSize (new Dimension (750, 300));
+        setLayout (null);
+
+        //add components
+        add (p1money);
+        add (p2money);
+        add (p3money);
+        add (p1);
+        add (p2);
+        add (p3);
+        add (spin);
+        add (guessLett);
+        add (buyVowel);
+        add (guessPhrase);
+
+        //set component bounds 
+        p3money.setBounds (620, 50, 100, 20);
+        p2money.setBounds (620, 80, 100, 20);
+        p1money.setBounds (620, 110, 100, 20);
+        p1.setBounds (515, 50, 100, 25);
+        p2.setBounds (515, 80, 100, 25);
+        p3.setBounds (515, 110, 100, 25);
+        spin.setBounds (550, 175, 155, 80);
+        guessLett.setBounds (10, 235, 150, 50);
+        buyVowel.setBounds (180, 235, 150, 50);
+        guessPhrase.setBounds (350, 235, 150, 50);
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+    	if(e.getSource().equals(spin)){
+    		spin.setEnabled(false);
+    		guessLett.setEnabled(true);
+    		buyVowel.setEnabled(true);
+    		guessPhrase.setEnabled(true);
+    	}
+
+    	else if(e.getSource().equals(guessLett)){
+    		spin.setEnabled(true);
+            guessLett.setEnabled(false);
+            buyVowel.setEnabled(false);
+            guessPhrase.setEnabled(false);
+            playerRotate();
+    	}
+
+    	else if(e.getSource().equals(buyVowel)){
+    		spin.setEnabled(true);
+            guessLett.setEnabled(false);
+            buyVowel.setEnabled(false);
+            guessPhrase.setEnabled(false);
+            playerRotate();
+    	}
+
+    	else if(e.getSource().equals(guessPhrase)){
+    		spin.setEnabled(true);
+            guessLett.setEnabled(false);
+            buyVowel.setEnabled(false);
+            guessPhrase.setEnabled(false);
+            playerRotate();
+    	}
+    
+	}
+    
+    public void playerRotate(){
+    	if(p1.isSelected()){
+    		p1.setSelected(false);
+    		p2.setSelected(true);
+    	}
+    	
+    	else if(p2.isSelected()){
+    		p2.setSelected(false);
+    		p3.setSelected(true);
+    	}
+    	
+    	else if(p3.isSelected()){
+    		p3.setSelected(false);
+    		p1.setSelected(true);
+    	}
+    }
+
+    public static void main (String[] args) {
+        JFrame frame = new JFrame ("Wheel of Fortune");
+        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add (new MainPanel());
+        frame.pack();
+        frame.setVisible (true);
+    }
+
+
+	
+}
+
+}
