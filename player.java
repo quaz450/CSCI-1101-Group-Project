@@ -76,5 +76,8 @@ public class Player {
 			return false;
 	}
 	
+	//Jessi added method
+	public int totalWinnings(){return winnings+bankedWinnings;}
+	
 	
 }
